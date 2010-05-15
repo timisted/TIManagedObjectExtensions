@@ -37,10 +37,8 @@ This method returns a new managed object for the entity, inserted into the manag
 
 ###Fetching Objects
 To fetch *all* the objects for the current entity:
-    NSArray *results;
     NSError *anyError = nil;
-    
-    results = [TIEmployee ti_allObjectsInManagedObjectContext:someContext error:&anyError];
+    NSArray *results = [TIEmployee ti_allObjectsInManagedObjectContext:someContext error:&anyError];
 
 To fetch all the objects matching a predicate, you can either create the predicate:
     NSPredicate *testPredicate = [NSPredicate predicateWithFormat:@"self.department == %@", someDepartment];
