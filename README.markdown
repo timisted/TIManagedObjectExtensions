@@ -1,5 +1,5 @@
 #TIManagedObjectExtensions
-*A category on NSManagedObject to facilitate easy fetching and counting of objects with Core Data *  
+*A category on NSManagedObject to facilitate easy creation, fetching and counting of objects with Core Data *  
 
 Tim Isted  
 [http://www.timisted.net](http://www.timisted.net)  
@@ -29,6 +29,13 @@ TIManagedObjectExtensions currently only works for subclasses of `NSManagedObjec
 
 The methods in `TIManagedObjectExtensions.h` should all be self explanatory.
 
+###Creating Objects
+To create a new managed object for the current entity:
+    TIEmployee *newEmployee = [TIEmployee ti_objectInManagedObjectContext:someContext];
+
+This method returns a new managed object for the entity, inserted into the managed object context.
+
+###Fetching Objects
 To fetch *all* the objects for the current entity:
     NSArray *results;
     NSError *anyError = nil;
@@ -54,6 +61,13 @@ All relevant methods can also take either a single sort descriptor, or an array 
                                inManagedObjectContext:someContext
                                  sortedWithDescriptor:singleDescriptor
                                                 error:&anyError];
+
+You can also specify the name of a key for sorting and whether the sort should be ascending or descending:
+    results = [TIEmployee ti_allObjectsInManagedObjectContext:someContext
+                                                  sortedByKey:@"dateOfBirth" 
+                                                    ascending:YES 
+                                                        error:&anyError];
+
 
 ##To Do List
 * Add non-entity-specific versions of all methods

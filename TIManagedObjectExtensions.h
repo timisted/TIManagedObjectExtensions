@@ -39,14 +39,17 @@
 
 + (NSArray *)ti_allObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError;
 + (NSArray *)ti_allObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptor:(NSSortDescriptor *)aDescriptor error:(NSError **)outError;
++ (NSArray *)ti_allObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext sortedByKey:(NSString *)aKey ascending:(BOOL)yesOrNo error:(NSError **)outError;
 + (NSArray *)ti_allObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptors:(NSArray *)someDescriptors error:(NSError **)outError;
 
 + (NSArray *)ti_objectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError;
 + (NSArray *)ti_objectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptor:(NSSortDescriptor *)aDescriptor error:(NSError **)outError;
++ (NSArray *)ti_objectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext sortedByKey:(NSString *)aKey ascending:(BOOL)yesOrNo error:(NSError **)outError;
 + (NSArray *)ti_objectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptors:(NSArray *)someDescriptors error:(NSError **)outError;
 
 + (NSArray *)ti_objectsInManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError matchingPredicateWithFormat:(NSString *)aFormat, ...;
 + (NSArray *)ti_objectsInManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptor:(NSSortDescriptor *)aDescriptor error:(NSError **)outError matchingPredicateWithFormat:(NSString *)aFormat, ...;
++ (NSArray *)ti_objectsInManagedObjectContext:(NSManagedObjectContext *)aContext sortedByKey:(NSString *)aKey ascending:(BOOL)yesOrNo error:(NSError **)outError matchingPredicateWithFormat:(NSString *)aFormat, ...;
 + (NSArray *)ti_objectsInManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptors:(NSArray *)someDescriptors error:(NSError **)outError matchingPredicateWithFormat:(NSString *)aFormat, ...;
 
 @end

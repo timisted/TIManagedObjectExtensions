@@ -114,6 +114,11 @@
 #pragma mark -
 #pragma mark Fetching Objects
 #pragma mark - All Objects
++ (NSArray *)ti_allObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext sortedByKey:(NSString *)aKey ascending:(BOOL)yesOrNo error:(NSError **)outError
+{
+    return [self ti_objectsMatchingPredicate:nil inManagedObjectContext:aContext sortedByKey:aKey ascending:yesOrNo error:outError];
+}
+
 + (NSArray *)ti_allObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptor:(NSSortDescriptor *)aDescriptor error:(NSError **)outError
 {
     return [self ti_objectsMatchingPredicate:nil inManagedObjectContext:aContext sortedWithDescriptor:aDescriptor error:outError];
@@ -152,6 +157,14 @@
     return [self ti_objectsMatchingPredicate:aPredicate inManagedObjectContext:aContext sortedWithDescriptors:sortDescriptors error:outError];
 }
 
++ (NSArray *)ti_objectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext sortedByKey:(NSString *)aKey ascending:(BOOL)yesOrNo error:(NSError **)outError
+{
+    NSSortDescriptor *sortDescriptor = nil;
+    if( aKey ) sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:aKey ascending:yesOrNo];
+    
+    return [self ti_objectsMatchingPredicate:aPredicate inManagedObjectContext:aContext sortedWithDescriptor:sortDescriptor error:outError];
+}
+
 + (NSArray *)ti_objectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError
 {
     return [self ti_objectsMatchingPredicate:aPredicate inManagedObjectContext:aContext sortedWithDescriptors:nil error:outError];
@@ -175,6 +188,16 @@
     va_end(args);
     
     return [self ti_objectsMatchingPredicate:thePredicate inManagedObjectContext:aContext sortedWithDescriptor:aDescriptor error:outError];
+}
+
++ (NSArray *)ti_objectsInManagedObjectContext:(NSManagedObjectContext *)aContext sortedByKey:(NSString *)aKey ascending:(BOOL)yesOrNo error:(NSError **)outError matchingPredicateWithFormat:(NSString *)aFormat, ...
+{
+    va_list args;
+    va_start(args, aFormat);
+    NSPredicate *thePredicate = [NSPredicate predicateWithFormat:aFormat arguments:args];
+    va_end(args);
+    
+    return [self ti_objectsMatchingPredicate:thePredicate inManagedObjectContext:aContext sortedByKey:aKey ascending:yesOrNo error:outError];
 }
 
 + (NSArray *)ti_objectsInManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptors:(NSArray *)someDescriptors error:(NSError **)outError matchingPredicateWithFormat:(NSString *)aFormat, ...
