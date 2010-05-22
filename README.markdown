@@ -15,6 +15,7 @@ TIManagedObjectExtensions are offered under the **MIT** license.
 * Create a fetch request for a given MOC with optional predicate and/or sort descriptor(s).
 * Fetch all instances of an entity in a MOC with optional sort descriptor(s).
 * Fetch instances matching a predicate, or predicate format string and arguments.
+* ***New:*** Fetch a single instance matching a predicate.
 * Count all instances of an entity in a MOC.
 * Count instances matching a predicate, or predicate format string and arguments.
 
