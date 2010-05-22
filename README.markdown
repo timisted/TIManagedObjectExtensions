@@ -36,11 +36,13 @@ To create a new managed object for the current entity:
 This method returns a new managed object for the entity, inserted into the managed object context.
 
 ###Fetching Objects
+####All Objects
 To fetch *all* the objects for the current entity:
     NSError *anyError = nil;
     NSArray *results = [TIEmployee ti_allObjectsInManagedObjectContext:someContext error:&anyError];
 
-To fetch all the objects matching a predicate, you can either create the predicate:
+####Matching Predicates
+To fetch objects matching a predicate, you can either create the predicate:
     NSPredicate *testPredicate = [NSPredicate predicateWithFormat:@"self.department == %@", someDepartment];
     
     results = [TIEmployee ti_objectsMatchingPredicate:testPredicate
@@ -52,6 +54,7 @@ or specify it as a format string:
                                                      error:&anyError
                                matchingPredicateWithFormat:@"self.department == %@", someDepartment];
 
+####Sorting
 All relevant methods can also take either a single sort descriptor, or an array of sort descriptors:
     NSSortDescriptor *singleDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES]
     
@@ -66,6 +69,13 @@ You can also specify the name of a key for sorting and whether the sort should b
                                                     ascending:YES 
                                                         error:&anyError];
 
+####Fetching a Single Object
+To return only the first object that matches a predicate, you can use one of the `ti_firstObjectIn...` methods:
+    TIEmployee *anEmployee = [TIEmployee ti_firstObjectInManagedObjectContext:someContext
+                                                                        error:nil 
+                                                  matchingPredicateWithFormat:@"self.employeeID matches %@", someID];
+    
+If no objects match, this will return `nil`.
 
 ##To Do List
 * Add non-entity-specific versions of all methods
