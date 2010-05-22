@@ -218,5 +218,27 @@
     return [self ti_objectsMatchingPredicate:thePredicate inManagedObjectContext:aContext sortedWithDescriptors:someDescriptors error:outError];
 }
 
+#pragma mark - First Object
++ (id)_ti_firstObjectInArrayIfExists:(NSArray *)anArray
+{
+    if( [anArray count] < 1 ) return nil;
+    
+    return [anArray objectAtIndex:0];
+}
+
++ (id)ti_firstObjectMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError
+{
+    return [self _ti_firstObjectInArrayIfExists:[self ti_objectsMatchingPredicate:aPredicate inManagedObjectContext:aContext error:outError]];
+}
+
++ (id)ti_firstObjectInManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError matchingPredicateWithFormat:(NSString *)aFormat, ...
+{
+    va_list args;
+    va_start(args, aFormat);
+    NSPredicate *thePredicate = [NSPredicate predicateWithFormat:aFormat arguments:args];
+    va_end(args);
+    
+    return [self ti_firstObjectMatchingPredicate:thePredicate inManagedObjectContext:aContext error:outError];
+}
 
 @end
