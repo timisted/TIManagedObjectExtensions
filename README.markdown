@@ -6,7 +6,7 @@ Tim Isted
 Twitter: @[timisted](http://twitter.com/timisted)
 
 ##License
-TIManagedObjectExtensions are offered under the **MIT** license.
+TIManagedObjectExtensions is offered under the **MIT** license.
 
 ##Summary
 `TIManagedObjectExtensions` is a category on `NSManagedObject`, adding one-line code utilities to **subclasses** of `NSManagedObject`, making it easy to:
@@ -35,6 +35,8 @@ To create a new managed object for the current entity:
     TIEmployee *newEmployee = [TIEmployee ti_objectInManagedObjectContext:someContext];
 
 This method returns a new managed object for the entity, inserted into the managed object context.
+
+(See [TICoreDataUtilties](http://github.com/timisted/TICoreDataUtilities) for easy creation of managed object contexts without using template code)
 
 ###Fetching Objects
 ####All Objects
