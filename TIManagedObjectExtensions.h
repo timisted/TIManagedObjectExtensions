@@ -34,9 +34,9 @@
 + (NSFetchRequest *)ti_fetchRequestWithPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptors:(NSArray *)someDescriptors;
 + (NSFetchRequest *)ti_fetchRequestInManagedObjectContext:(NSManagedObjectContext *)aContext withPredicateWithFormat:(NSString *)aFormat, ...;
 
-+ (int)ti_numberOfObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError;
-+ (int)ti_numberOfObjectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError;
-+ (int)ti_numberOfObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError matchingPredicateWithFormat:(NSString *)aFormat, ...;
++ (NSUInteger)ti_numberOfObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError;
++ (NSUInteger)ti_numberOfObjectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError;
++ (NSUInteger)ti_numberOfObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError matchingPredicateWithFormat:(NSString *)aFormat, ...;
 
 + (NSArray *)ti_allObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError;
 + (NSArray *)ti_allObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptor:(NSSortDescriptor *)aDescriptor error:(NSError **)outError;

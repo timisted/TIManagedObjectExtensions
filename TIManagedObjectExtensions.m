@@ -92,12 +92,12 @@
 }
 #pragma mark -
 #pragma mark Counting Objects
-+ (int)ti_numberOfObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError
++ (NSUInteger)ti_numberOfObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError
 {
     return [self ti_numberOfObjectsMatchingPredicate:nil inManagedObjectContext:aContext error:outError];
 }
 
-+ (int)ti_numberOfObjectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError
++ (NSUInteger)ti_numberOfObjectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError
 {
     NSFetchRequest *countRequest = [self ti_fetchRequestWithPredicate:aPredicate inManagedObjectContext:aContext];
     
@@ -109,7 +109,7 @@
     return count;
 }
 
-+ (int)ti_numberOfObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError matchingPredicateWithFormat:(NSString *)format, ...
++ (NSUInteger)ti_numberOfObjectsInManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError matchingPredicateWithFormat:(NSString *)format, ...
 {
     va_list args;
     va_start(args, format);
