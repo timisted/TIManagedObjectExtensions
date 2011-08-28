@@ -143,11 +143,15 @@
 }
 
 #pragma mark - Matching Predicate
-+ (NSArray *)ti_objectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptors:(NSArray *)someDescriptors error:(NSError **)outError
++ (NSArray *)ti_objectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptors:(NSArray *)someDescriptors limit:(NSUInteger)fetchLimit error:(NSError **)outError
 {
     NSError *anyError = nil;
     
     NSFetchRequest *request = [self ti_fetchRequestWithPredicate:aPredicate inManagedObjectContext:aContext sortedWithDescriptors:someDescriptors];
+    
+    if( fetchLimit > 0 ) {
+        [request setFetchLimit:fetchLimit];
+    }
     
     NSArray *results = [aContext executeFetchRequest:request error:&anyError];
     
@@ -155,6 +159,11 @@
         *outError = anyError;
     
     return results;
+}
+
++ (NSArray *)ti_objectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptors:(NSArray *)someDescriptors error:(NSError **)outError
+{
+    return [self ti_objectsMatchingPredicate:aPredicate inManagedObjectContext:aContext sortedWithDescriptors:someDescriptors limit:0 error:outError];
 }
 
 + (NSArray *)ti_objectsMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext sortedWithDescriptor:(NSSortDescriptor *)aDescriptor error:(NSError **)outError
@@ -228,7 +237,7 @@
 
 + (id)ti_firstObjectMatchingPredicate:(NSPredicate *)aPredicate inManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError
 {
-    return [self _ti_firstObjectInArrayIfExists:[self ti_objectsMatchingPredicate:aPredicate inManagedObjectContext:aContext error:outError]];
+    return [self _ti_firstObjectInArrayIfExists:[self ti_objectsMatchingPredicate:aPredicate inManagedObjectContext:aContext sortedWithDescriptors:nil limit:1 error:outError]];
 }
 
 + (id)ti_firstObjectInManagedObjectContext:(NSManagedObjectContext *)aContext error:(NSError **)outError matchingPredicateWithFormat:(NSString *)aFormat, ...
